@@ -1,0 +1,651 @@
+$color-dark: #262626;
+$color-black: #000000;
+$color-primary: #d4ab55;
+$color-secondary: #bbb;
+$color-white: #fff;
+
+$font-dancingScript: 'Dancing Script', cursive;
+$font-josefinSans: 'Josefin Sans', sans-serif;
+$font-nunito: 'Nunito', sans-serif;
+
+@mixin flexLayout {
+
+	display: flex;
+	justify-content:center;
+	align-items:center;	
+
+}
+
+@mixin textStyles($transform: uppercase) {
+	font-weight: 300;
+	letter-spacing: 2px;
+	text-transform: $transform;
+}
+
+@mixin centering($topValue) {
+	
+	position: absolute;
+	top: $topValue;
+	left: 50%;
+	transform: translate(-50%, -50%); 	
+
+}
+
+%fullspace {
+	width: 100%;
+	height: 100%;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color: $color-dark; 
+}
+
+ 
+
+.hamburgur-menu {
+	width: 40px;
+	height: 40px;
+	position: fixed;
+	top: 10%;
+	right: 5%;
+	z-index: 300;
+
+	@media (max-width: 800px) {
+		height: 35px;
+		width: 35px;
+	}
+
+	@media (max-width: 500px) {
+		height: 25px;
+		width: 25px;
+	}
+
+	.menu {
+		@extend %fullspace;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		cursor: pointer;
+		transition: transform .5s;
+
+		&-line {
+			width: 100%;
+			height: 4px;
+			background-color: $color-primary;
+			transform-origin: right;
+			transition: all .5s .5s;
+
+		@media (max-width: 800px) {
+			height: 3px;
+		}
+
+		@media (max-width: 500px) {
+			height: 2px;
+		}
+
+		}
+	}
+}
+
+.logo {
+	font-size: 70px;
+	color: $color-primary;
+	width: 110px;
+	height: 110px;
+	border: 3px solid $color-primary;
+	border-radius: 50%; 
+	margin-right: 20px;
+	@include flexLayout;
+	text-decoration: none;
+
+	@media (max-width: 1000px) {
+		font-size: 50px;
+		width: 90px;
+		height: 90px;
+	}
+
+	@media (max-width: 500px) {
+		height: 50px;
+		width: 50px;
+		font-size: 30px;
+		border-width: 2px;
+	}
+}
+
+.main-name {
+	font-family: $font-nunito;
+	font-size: 50px;
+	color: $color-secondary;
+	@include textStyles;
+
+	@media (max-width: 1000px) {
+		font-size: 40px;
+	}
+
+	@media (max-width: 500px) {
+		font-size: 20px;
+		text-align: center;
+	}
+}
+
+.sub-name {
+	font-family: $font-josefinSans;
+	font-size: 18px;
+	color: $color-secondary;
+	text-align: center;
+	@include textStyles;
+
+	@media (max-width: 500px) {
+		font-size: 12px;
+		text-align: center;
+	}
+}
+
+.main-heading {
+	font-family: $font-dancingScript;
+	font-size: 100px;
+	font-weight: 300;
+	color: $color-primary;
+	margin-bottom: 40px;
+
+	@media(max-width: 1600px) {
+		font-size: 80px;
+	}
+
+	@media (max-width: 1000px) {
+		font-size: 60px;
+	}
+
+	@media (max-width: 500px) {
+		font-size: 40px;
+		margin-bottom: 20px;
+	}
+}
+
+.sub-heading {
+	font-family: $font-josefinSans;
+	font-size: 60px;
+	font-weight: 300;
+	color: $color-secondary;
+	margin-bottom: 80px;
+	text-align: center;
+
+	@media(max-width: 1600px) {
+		font-size: 50px;
+		margin-bottom: 50px;
+	}
+
+	@media (max-width: 1000px) {
+		font-size: 30px;
+	}
+
+	@media(max-width: 1300px) {
+		font-size: 40px;
+		margin-bottom: 30px;
+	}
+
+	@media (max-width: 500px) {
+		font-size: 20px;
+		margin-bottom: 10px;
+	}
+}
+
+.main-btn {
+	width: 170px;
+	height: 45px;
+	font-family: $font-josefinSans;
+	font-size: 14px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	color: $color-primary;
+	background-color: transparent;
+	border: 1px solid $color-primary;
+	outline: none;
+	cursor: pointer;
+	transition: background-color .4s;
+
+		&:hover {
+			background-color: $color-primary;
+			color: $color-dark;
+		}
+
+		@media (max-width: 800px) {
+			width: 150px;
+			height: 35px;
+			font-size: 12px;
+		}
+
+		@media (max-width: 500px) {
+			width: 130px;
+			height: 30px;
+			font-size: 10px;
+		}
+}
+
+.card {
+	width: 33.3333%;
+	height: 30vw;
+	position: relative;
+	overflow: hidden;
+
+	&:hover .card-overlay {
+		left: 0;
+	}
+
+	&-overlay {
+		position: absolute;
+		top: 0;
+		left: -100%;
+		background-color: rgba($color-primary, .6);
+		color: $color-white;
+		z-index: 10;
+		@include flexLayout;
+		flex-direction: column;
+		@extend %fullspace;
+		transition: left .7s;
+
+		&-heading {
+			font-family: $font-nunito;
+			font-size: 50px;
+			@include textStyles(capatalize);
+
+			@media(max-width: 900px) {
+				font-size: 35px;
+			}
+
+			@media(max-width: 650px) {
+				font-size: 25px;
+			}
+
+			@media(max-width: 500px) {
+				display: none;
+			}
+		}
+
+		&-paragraph {
+			font-family: $font-josefinSans;
+			font-size: 30px;
+			margin-bottom: 30px;
+			@include textStyles(capatalize);
+
+			@media(max-width: 900px) {
+				font-size: 20px;
+			}
+
+			@media(max-width: 650px) {
+				font-size: 15px;
+			}
+
+			@media(max-width: 500px) {
+				display: none;
+			}	
+		}
+
+		&-btn {
+			width: 150px;
+			height: 40px;
+			color: $color-primary;
+			background-color: $color-white;
+			font-family: $font-josefinSans;
+			font-size: 14px;
+			font-weight: bold;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			border: 1px solid $color-primary;
+			border-radius: 30px;
+			outline: none;
+			cursor: pointer;
+
+			@media(max-width: 900px) {
+				font-size: 12px;
+				width: 130px;
+				height: 30px;
+			}
+
+			@media(max-width: 650px) {
+				font-size: 10px;
+				width: 100px;
+				height: 30px;
+			}
+		}
+
+	}
+
+	&-img {
+		@extend %fullspace;
+		object-fit: cover;
+		opacity: .5;
+	}
+}
+
+.left-img {
+	width: 300px;
+}
+
+.navbar {
+
+	position: relative;
+	z-index: 200;
+
+
+	&-navigation {
+		display: flex;
+
+		&-left {
+			width: 50vw;
+			height: 100vh;
+			background-color: $color-dark;
+			position: fixed;
+			left: -50vw;
+			transition: left .8s cubic-bezier(1, 0, 0, 1);
+
+			@media (max-width: 800px) {
+				display: none;
+			}
+
+			.left-img {
+				width: 50%;
+				position: absolute;
+				box-shadow: 0 15px 60px rgba($color-black, .4);
+			
+				@media(max-width: 1300px) {
+					width: 55%;
+				}
+
+				@media(max-width: 1000px) {
+					width: 65%;
+				}
+
+			}
+
+			.left-img-1 {
+				top: 15%;
+				left: 15%;
+
+				@media(max-width: 1000px) {
+					left: 5%;
+				}
+			}
+
+			.left-img-2 {
+				top: 35%;
+				left: 25%;
+
+				@media(max-width: 1000px) {
+					left: 15%;
+				}
+			}
+
+			.left-img-3 {
+				top: 55%;
+				left: 35%;
+
+				@media(max-width: 1000px) {
+					left: 25%;
+				}
+			}
+		}
+
+		&-right {
+			width: 50vw;
+			height: 100vh;
+			background-color: #1f1d1d;
+			position: fixed;
+			right: -50vw;
+			@include flexLayout;
+			transition: right .8s cubic-bezier(1, 0, 0, 1);
+
+			@media (max-width: 800px) {
+				width: 100vw;
+				right: 100vw;
+			}
+		}
+
+		.nav-list {
+			
+			&-item {
+				list-style: none;
+			}
+
+			&-link {
+				font-family: $font-dancingScript;
+				font-size: 50px;
+				@include textStyles(capatalize);
+				color: $color-secondary;
+				text-decoration: none;
+				display: block;
+				margin: 20px;
+				text-align: center;
+				transition: all .5s;
+
+				&:hover {
+					color: $color-primary;
+					letter-spacing: 4px;
+
+				}
+
+				@media (max-width: 600px) {
+					font-size: 40px;
+				}
+			}
+		}
+	}
+}
+
+.checkbox:checked ~ .navbar-navigation .navbar-navigation-left {
+	left: 0;
+}
+
+.checkbox:checked ~ .navbar-navigation .navbar-navigation-right {
+	right: 0;
+}
+
+.checkbox:checked ~ .hamburgur-menu .menu {
+	transform: rotateZ(90deg);
+}
+
+.checkbox:checked ~ .hamburgur-menu .menu-line-1 {
+	transform: rotateZ(-40deg);
+}
+
+.checkbox:checked ~ .hamburgur-menu .menu-line-2 {
+	opacity:0;
+}
+
+.checkbox:checked ~ .hamburgur-menu .menu-line-3 {
+	transform: rotateZ(40deg);
+}
+
+.header{
+	width: 100%;
+	height: 160vh;
+	position: relative;
+	background: linear-gradient(rgba($color-black, .8), rgba($color-black, .6)) ,url(..https://raw.githubusercontent.com/swatiyadav1/Restauarant-Project-SASS/main/Project%201%20-%20Starter%20Files/images/bg.jpeg) center no-repeat;
+	background-size: cover;
+
+	.brand {
+		display: flex;
+		align-items:center;
+		@include centering(15%);
+
+		@media (max-width: 500px) {
+			@include centering(12%);
+		}
+	}
+
+		&-banner {
+			text-align: center;
+			@include centering(60%);
+		}
+
+
+}
+
+.about-us {
+	height: 100vh;
+	display: flex;
+	align-items: center;
+
+	@media(max-width: 900px) {
+		height: 70vh;
+	}
+
+	&-left {
+		width: 40%;
+		position: relative;
+		left:-200px;
+
+		@media (max-width: 1300px) {
+			left: -150px;
+		}
+
+		@media (max-width: 800px) {
+			display: none;
+		}
+
+		img {
+			width: 100%;
+			opacity: .7;
+		}
+	}
+
+	&-right {
+		width: 60%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 0 100px;
+		box-sizing: border-box; 
+
+		@media (max-width: 1300px) {
+			padding: 0 50px; 
+		}
+
+		@media (max-width: 800px) {
+			width: 100%;
+		}
+
+		.stars {
+			margin: 30px 0; 
+
+			@media (max-width: 1000px) {
+				margin: 15px 0; 
+			}
+		}
+
+		.star {
+			font-size: 15px;
+			color: $color-primary;
+			margin-left: 10px;
+		
+			@media (max-width: 1000px) {
+				font-size: 12px;
+			}
+
+		}
+
+		.description {
+			font-family: $font-josefinSans;
+			font-size: 25px;
+			font-style: italic;
+			color: $color-secondary;
+			text-align: justify;
+
+			&::first-letter {
+				padding-left: 50px;
+			}
+
+			@media(max-width: 1600px) {
+				font-size: 18px;
+			}
+
+			@media(max-width: 1000px) {
+				font-size: 14px;
+			}
+
+			@media(max-width: 500px) {
+				font-size: 12px;
+			}
+		}
+	}
+}
+
+.gallery {
+	.cards-wrapper {
+		display: flex;
+		flex-wrap: wrap;
+	}
+}
+
+.footer {
+	padding: 70px 0;
+	@include flexLayout;
+	flex-direction: column;
+
+	@media(max-width: 500px) {
+		padding: 40px 0;
+	}
+
+	&-header {
+		display: flex;
+		align-items: center;
+		margin-bottom: 70px;
+	}
+
+	.social-media {
+		display: flex;
+		width: 300px;
+		justify-content: space-between;
+		margin-bottom: 70px;
+
+		@media(max-width: 500px) {
+			width: 200px;
+			margin-bottom: 40px;
+		}
+	
+		&-item {
+			list-style: none;
+		}
+
+		&-link {
+			text-decoration: none;
+			font-size: 50px;
+			color: $color-secondary;
+			transition: color .7s;
+
+			&:hover {
+				color: $color-primary;
+			}
+
+			@media(max-width: 1000px) {
+				font-size: 35px;
+			}
+
+			@media(max-width: 500px) {
+				font-size: 25px;
+			}
+		}
+	}
+
+	&-copyright-paragraph {
+		font-family: $font-josefinSans;
+		font-family: 18px;
+		color: $color-secondary;
+		@include textStyles(capatalize);
+
+		@media (max-width: 800px) {
+			width: 70%;
+			margin: auto;
+			text-align: center;
+		}
+
+		@media(max-width: 500px) {
+			font-size: 14px;
+		}
+	}
+}
